@@ -1,88 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { MdAddShoppingCart } from 'react-icons/md';
-
-import product from '../../assets/images/product.jpg';
-
+import { formatPrice } from '../../util/format';
 import { ProductList } from './styles';
 
-function Home() {
+import api from '../../services/api';
+
+const Home = () => {
+  const [products, setProducts] = useState([]);
+
+  async function loadProducts() {
+    const response = await api.get('products');
+    const data = response.data.map((product) => ({
+      ...product,
+      priceFormatted: formatPrice(product.price),
+    }));
+    setProducts(data);
+  }
+
+  useEffect(() => {
+    loadProducts();
+  }, [setProducts]);
+
   return (
     <ProductList>
-      <li>
-        <img src={product} alt="Tênis" />
-        <strong>Tênis muito legal</strong>
-        <span>R$129,90</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
+      {products &&
+        products.map((product) => {
+          return (
+            <li key={product.id}>
+              <img src={product.image} alt={product.title} />
+              <strong>{product.title}</strong>
+              <span>{product.priceFormatted}</span>
+              <button type="button">
+                <div>
+                  <MdAddShoppingCart size={16} color="#FFF" /> 3
+                </div>
 
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img src={product} alt="Tênis" />
-        <strong>Tênis muito legal</strong>
-        <span>R$129,90</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
-
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img src={product} alt="Tênis" />
-        <strong>Tênis muito legal</strong>
-        <span>R$129,90</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
-
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img src={product} alt="Tênis" />
-        <strong>Tênis muito legal</strong>
-        <span>R$129,90</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
-
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img src={product} alt="Tênis" />
-        <strong>Tênis muito legal</strong>
-        <span>R$129,90</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
-
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img src={product} alt="Tênis" />
-        <strong>Tênis muito legal</strong>
-        <span>R$129,90</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
-
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
+                <span>ADICIONAR AO CARRINHO</span>
+              </button>
+            </li>
+          );
+        })}
     </ProductList>
   );
-}
+};
 
 export default Home;
