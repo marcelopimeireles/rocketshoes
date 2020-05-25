@@ -3622,6 +3622,11 @@ ignore@^4.0.6:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
+immer@^6.0.8:
+  version "6.0.8"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-6.0.8.tgz#3758890d66ed7baed5703b9e0763785a16156478"
+  integrity sha512-wmVdrkqL6OzhX5z2k/c0t8g+YzGy+V8B/r1GRdCTO0UcTiFkB0XVAxpJQT045KaNV2u14HzbLCYKJmt7yVCakg==
+
 import-fresh@^3.0.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-3.2.1.tgz#633ff618506e793af5ac91bf48b72677e15cbe66"
