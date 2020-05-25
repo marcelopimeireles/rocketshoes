@@ -6,7 +6,7 @@ import { ProductList } from './styles';
 
 import api from '../../services/api';
 
-const Home = (props) => {
+const Home = ({ dispatch }) => {
   const [products, setProducts] = useState([]);
 
   async function loadProducts() {
@@ -23,7 +23,6 @@ const Home = (props) => {
   }, [setProducts]);
 
   const handleAddProduct = (product) => {
-    const { dispatch } = props;
     dispatch({
       type: 'ADD_TO_CART',
       product,
