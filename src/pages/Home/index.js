@@ -10,7 +10,7 @@ import { ProductList } from './styles';
 
 import api from '../../services/api';
 
-const Home = ({ amount, addToCart }) => {
+const Home = ({ amount, addToCartRequest }) => {
   const [products, setProducts] = useState([]);
 
   async function loadProducts() {
@@ -35,7 +35,10 @@ const Home = ({ amount, addToCart }) => {
               <img src={product.image} alt={product.title} />
               <strong>{product.title}</strong>
               <span>{product.priceFormatted}</span>
-              <button type="button" onClick={() => addToCart(product)}>
+              <button
+                type="button"
+                onClick={() => addToCartRequest(product.id)}
+              >
                 <div>
                   <MdAddShoppingCart size={16} color="#FFF" />
                   {amount[product.id] || 0}
