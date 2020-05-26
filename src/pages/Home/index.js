@@ -24,7 +24,7 @@ const Home = ({ amount, addToCartRequest }) => {
 
   useEffect(() => {
     loadProducts();
-  }, [setProducts]);
+  }, []);
 
   return (
     <ProductList>
