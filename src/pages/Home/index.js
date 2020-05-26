@@ -10,7 +10,7 @@ import { ProductList } from './styles';
 
 import api from '../../services/api';
 
-const Home = ({ addToCart }) => {
+const Home = ({ amount, addToCart }) => {
   const [products, setProducts] = useState([]);
 
   async function loadProducts() {
@@ -37,7 +37,8 @@ const Home = ({ addToCart }) => {
               <span>{product.priceFormatted}</span>
               <button type="button" onClick={() => addToCart(product)}>
                 <div>
-                  <MdAddShoppingCart size={16} color="#FFF" /> 3
+                  <MdAddShoppingCart size={16} color="#FFF" />
+                  {amount[product.id] || 0}
                 </div>
 
                 <span>ADICIONAR AO CARRINHO</span>
@@ -49,7 +50,14 @@ const Home = ({ addToCart }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  amount: state.cart.reduce((amount, product) => {
+    amount[product.id] = product.amount;
+    return amount;
+  }, {}),
+});
+
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(CartActions, dispatch);
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
